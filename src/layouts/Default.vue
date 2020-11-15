@@ -7,7 +7,7 @@
         Built with
         <a class="link" href="//gridsome.org">Gridsome</a>
         & Made with ❤️ by
-        <a class="link" href="//twitter.com/lauragift_">Gift Egwuenu</a>
+        <a class="link" href="https://www.facebook.com/profile.php?id=100006506385005">Hikaru Inomata</a>
       </p>
     </div>
   </main>
