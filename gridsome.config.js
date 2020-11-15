@@ -1,32 +1,28 @@
-// This is where project configuration and plugin options are located.
-// Learn more: https://gridsome.org/docs/config
-
-// Changes here require a server restart.
-// To restart press CTRL + C in terminal and run `gridsome develop`
-
 module.exports = {
-  siteName: 'Gridsome Blog',
-  siteDescription: 'A simple blog designed with Gridsome',
+  siteName: 'Gridsome',
+  siteDescription: 'A WordPress starter for Gridsome',
+  icon: './src/assets/img/site-icon.png',
   templates: {
-    Post: '/blog/:title',
+    WordPressCategory: '/category/:slug', // adds a route for the "category" post type (Optional)
+    WordPressPost: '/article/:id', // adds a route for the "post" post type (Optional)
+    WordPressPostTag: '/tag/:slug' // adds a route for the "post_tag" post type (Optional)
   },
+
   plugins: [
     {
-      use: '@gridsome/source-filesystem',
+      use: '@gridsome/source-wordpress',
       options: {
-        path: 'content/posts/**/*.md',
-        typeName: 'Post',
+        baseUrl: 'http://inoblog.wp.xdomain.jp/wp-json/wp/v2/', // required
+        typeName: 'WordPress', // GraphQL schema name (Optional)
+      }
+    },
+    {
+      use: 'gridsome-plugin-gtm',
+      options: {
+        id: 'GTM-WW7FMML',
+        enabled: true,
+        debug: true
       }
     }
   ],
-  transformers: {
-    //Add markdown support to all file-system sources
-    remark: {
-      externalLinksTarget: '_blank',
-      externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
-      plugins: [
-        '@gridsome/remark-prismjs'
-      ]
-    }
-  },
 }

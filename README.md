@@ -1,25 +1,68 @@
-# Gridsome Minimal Blog
+# このプロジェクトについて
+最近流行のJamstackを利用して、WordPressを静的にホスティングします。
+- サイトURL
+  - [https://gridsome.demodemo.link/](https://gridsome.demodemo.link/)
 
-> A blog starter theme for [Gridsome]() with a minimalistic design.
+利用しているサービスは以下の通り
+- WordPress
+  -  [https://https://megane-blog.com/](https://megane-blog.com/)
+  - Xserver にてホスティング
+- Github
+  - [https://github.com/megane9988/gridsome-megane-blog](https://github.com/megane9988/gridsome-megane-blog)
+  - リポジトリとして利用
+- Gridsome
+    - [https://gridsome.org/](https://gridsome.org/)
+    - Vue.jsを利用したスタティックサイトジェネレーター
+    - WordPressのJsonファイルを元に静的なサイトを構築する
+    - 今回は雛形として後述のWordPress starter for Gridsomeを利用
+  - 後述を参照
+- Netlify
+  - [https://www.netlify.com/](https://www.netlify.com/)
+  - Githubのリポジトリを参照して、pushなどのタイミングにビルドを行い、その結果の静的なファイルをホスティング
+- 結果として出力されるURL
+  - [https://gridsome.demodemo.link/](https://gridsome.demodemo.link/)
 
-## Preview
+# プロジェクトの進め方
+- Githubのissueベースで作業を進める
+- [プロジェクトボード](https://github.com/megane9988/gridsome-megane-blog/projects/1)を利用する
 
-![preview](https://res.cloudinary.com/lauragift/image/upload/v1558648720/gridsome-minimal-blog_qqm49s.png)
+
+# WordPress starter for Gridsome について
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gridsome/gridsome-starter-wordpress)
 
 ## Install
-### 1. Install Gridsome CLI tool if you don't have
 
-`npm install --global @gridsome/cli`
+`gridsome create my-gridsome-project wordpress`
 
-### 2. Create a Gridsome project
+## Guide
 
-1. `gridsome create my-blog https://github.com/lauragift21/gridsome-minimal-blog` to install default starter
-2. `cd my-blog` to open the folder
-3. `gridsome develop` to start a local dev server at `http://localhost:8080`
-4. Happy coding 🎉🙌
+Add your WordPress URL to the plugin options.
 
-<!-- Markdown snippet -->
-### 3. Deploy Gridsome project
-Use this deploy button to get your own copy of the repository.
+```js
+// gridsome.config.js
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/lauragift21/gridsome-minimal-blog)
+module.exports = {
+  plugins: [
+    {
+      use: '@gridsome/source-wordpress',
+      options: {
+        baseUrl: 'YOUR_WEBSITE_URL', // required
+        typeName: 'WordPress', // GraphQL schema name
+      }
+    }
+  ],
+  // Setup template routes for any WordPress collection
+  templates: {
+    WordPressPost: '/:year/:month/:day/:slug',
+    WordPressTag: '/tag/:slug'
+  },
+}
+
+```
+
+See all [options](https://gridsome.org/plugins/@gridsome/source-wordpress).
+
+## Included templates
+
+This starter includes basic templates for categories, tags and posts.
